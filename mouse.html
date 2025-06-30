@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Hover</title>
+  </head>
+  <body>
+    <script>
+      const outLine = document.createElement("div");
+      outLine.setAttribute("class", "mouse-effect");
+      document.body.appendChild(outLine);
+      outLine.style.position = "absolute";
+      outLine.style.width = "50px";
+      outLine.style.height = "50px";
+      outLine.style.borderRadius = "50%";
+      outLine.style.pointerEvents = "none";
+      outLine.style.transform = "scale(0)";
+      outLine.style.transition = "transform 0.1s ease, width 0.1s ease, height 0.1s ease";
+      outLine.style.border = "solid #000000 3px";
+      const mouseEffect = document.querySelector(".mouse-effect");
+      document.addEventListener("mousemove", (event) => {
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+        mouseEffect.style.left = `${mouseX - mouseEffect.offsetWidth / 2}px`;
+        mouseEffect.style.top = `${mouseY - mouseEffect.offsetHeight / 2}px`;
+        mouseEffect.style.transform = "scale(1)";
+        mouseEffect.style.transition = "transform 0.1s ease, width 0.1s ease, height 0.1s ease";
+      });
+      document.addEventListener("mouseleave", () => {
+        mouseEffect.style.transform = "scale(0)";
+      });
+    </script>
+  </body>
+</html>
