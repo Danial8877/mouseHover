@@ -7,29 +7,22 @@
   </head>
   <body>
     <script>
-      const outLine = document.createElement("div");
-      outLine.setAttribute("class", "mouse-effect");
-      document.body.appendChild(outLine);
-      outLine.style.position = "absolute";
-      outLine.style.width = "50px";
-      outLine.style.height = "50px";
-      outLine.style.borderRadius = "50%";
-      outLine.style.pointerEvents = "none";
-      outLine.style.transform = "scale(0)";
-      outLine.style.transition = "transform 0.1s ease, width 0.1s ease, height 0.1s ease";
-      outLine.style.border = "solid #000000 3px";
-      const mouseEffect = document.querySelector(".mouse-effect");
-      document.addEventListener("mousemove", (event) => {
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
-        mouseEffect.style.left = `${mouseX - mouseEffect.offsetWidth / 2}px`;
-        mouseEffect.style.top = `${mouseY - mouseEffect.offsetHeight / 2}px`;
-        mouseEffect.style.transform = "scale(1)";
-        mouseEffect.style.transition = "transform 0.1s ease, width 0.1s ease, height 0.1s ease";
-      });
-      document.addEventListener("mouseleave", () => {
-        mouseEffect.style.transform = "scale(0)";
-      });
+if (matchMedia('(any-pointer:fine)').matches) {
+  const m = Object.assign(document.body.appendChild(document.createElement('div')), {
+    style: `
+      position:fixed;width:50px;height:50px;
+      border:3px solid #000;border-radius:50%;
+      pointer-events:none;transform:scale(0);
+      transition:.1s ease`
+});
+document.body.style.overflow = 'hidden';
+document.addEventListener("mousemove", e => {
+    m.style.transform = 'scale(1)';
+    m.style.left = e.clientX - 25 + 'px';
+    m.style.top  = e.clientY - 25 + 'px';
+});
+document.addEventListener('mouseleave', () => m.style.transform = 'scale(0)');
+}
     </script>
   </body>
 </html>
